@@ -1,16 +1,40 @@
-# React + Vite
+This is the standard + correct + professional sequence for Node/Vite development Dockerfiles, which should be done accordingly. (the same steps should be followed)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# EXPLANATION
 
-Currently, two official plugins are available:
+FROM node:24-alpine
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Use Node.js 24 (lightweight version) as the BASE for the container.
 
-## React Compiler
+WORKDIR /app
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Create a folder called /app inside the container and work inside it.
+- Used to mention the Working Directory
 
-## Expanding the ESLint configuration
+COPY package.json ./*
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Copy package.json + package-lock.json into /app (Used to install dependencies)
+
+RUN npm install
+
+- Install all project dependencies inside the image.
+
+COPY . .
+
+- Copy your whole project into the container's /app folder.
+- 1st dot is for current folder/file --> Dockerfile
+- 2nd dot is for the container --> '/app'
+
+EXPOSE 5173
+
+- Tell Docker that this app uses port 5173 (Vite's port).
+
+CMD ["npm", "run", "dev", "--", "--host"]
+
+- When the container starts → run the development server AND allow external access.
+
+
+## NOTE
+
+- RUN = Executes Commands at Build-time (this is Image Level)
+- CMD = Executes Commands at Run-time   (this is Container Level)
