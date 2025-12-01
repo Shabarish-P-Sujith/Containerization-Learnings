@@ -52,9 +52,10 @@ CMD ["npm", "run", "dev", "--", "--host"]
 - CMD = Executes Commands at Run-time   (this is Container Level)
 
 # TERMINAL COMMAND
-
+```bash
 docker run -p 3000:5173 react-img-01:v1
 docker run -d -p 3000:5173 react-img-01:v1
+```
 
 ## NOTE
 
