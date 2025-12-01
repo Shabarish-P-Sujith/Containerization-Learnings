@@ -1,0 +1,13 @@
+a) PostgreSQL
+
+docker run -d --rm `
+  -v pgdata:/var/lib/postgresql/data `
+  -e POSTGRES_USER=myuser `
+  -e POSTGRES_PASSWORD=mypass `
+  -e POSTGRES_DB=mydb `
+  -p 5432:5432 `
+  postgres:15.1-alpine
+
+b) MongoDB
+c) Redis
+d) MySQL

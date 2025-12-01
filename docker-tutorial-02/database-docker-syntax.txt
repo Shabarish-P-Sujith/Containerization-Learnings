@@ -1,0 +1,71 @@
+a) PostgreSQL
+
+docker run -d --rm \
+  -v mongodata:/data/db \
+  -e MONGO_INITDB_ROOT_USERNAME=root \
+  -e MONGO_INITDB_ROOT_PASSWORD=foobarbaz \
+  -p 27017:27017 \
+  mongo:6.0.4
+
+# With custom mongod.conf file
+docker run -d --rm \
+  -v mongodata:/data/db \
+  -v ${PWD}/mongod.conf:/etc/mongod.conf \
+  -e MONGO_INITDB_ROOT_USERNAME=root \
+  -e MONGO_INITDB_ROOT_PASSWORD=foobarbaz \
+  -p 27017:27017 \
+  mongo:6.0.4 --config /etc/mongod.conf
+
+================================================================================================
+
+b) MongoDB
+
+docker run -d --rm \
+  -v mongodata:/data/db \
+  -e MONGO_INITDB_ROOT_USERNAME=root \
+  -e MONGO_INITDB_ROOT_PASSWORD=foobarbaz \
+  -p 27017:27017 \
+  mongo:6.0.4
+
+# With custom mongod.conf file
+docker run -d --rm \
+  -v mongodata:/data/db \
+  -v ${PWD}/mongod.conf:/etc/mongod.conf \
+  -e MONGO_INITDB_ROOT_USERNAME=root \
+  -e MONGO_INITDB_ROOT_PASSWORD=foobarbaz \
+  -p 27017:27017 \
+  mongo:6.0.4 --config /etc/mongod.conf
+
+================================================================================================
+
+c) Redis
+
+docker run -d --rm \
+  -v redisdata:/data \
+  redis:7.0.8-alpine
+
+# With custom redis.conf file
+docker run -d --rm \
+  -v redisdata:/data \
+  -v ${PWD}/redis.conf:/usr/local/etc/redis/redis.conf \
+  redis:7.0.8-alpine redis-server /usr/local/etc/redis/redis.conf
+
+================================================================================================
+
+d) MySQL 
+
+docker run -d --rm \
+  -v mysqldata:/var/lib/mysql \
+  -e MYSQL_ROOT_PASSWORD=foobarbaz \
+  -p 3306:3306 \
+  mysql:8.0.32
+
+# With custom conf.d
+docker run -d --rm \
+  -v mysqldata:/var/lib/mysql \
+  -v ${PWD}/conf.d:/etc/mysql/conf.d \
+  -e MYSQL_ROOT_PASSWORD=foobarbaz \
+  -p 3306:3306 \
+  mysql:8.0.32
+
+================================================================================================
