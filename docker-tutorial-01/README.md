@@ -53,7 +53,8 @@ CMD ["npm", "run", "dev", "--", "--host"]
 
 # TERMINAL COMMAND
 ```bash
-docker run -p 3000:5173 react-img-01:v1
+docker build -t react-img-01:v1 .
+
 docker run -d -p 3000:5173 react-img-01:v1
 ```
 
