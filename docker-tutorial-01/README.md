@@ -2,23 +2,27 @@ This is the standard + correct + professional sequence for Node/Vite development
 
 # EXPLANATION
 
+```bash
 FROM node:24-alpine
-
+```
 - Use Node.js 24 (lightweight version) as the BASE for the container.
 
+```bash
 WORKDIR /app
-
+```
 - Create a folder called /app inside the container and work inside it.
 - Used to mention the Working Directory
 
+```bash
 COPY package.json ./*
-
+```
 - Copy package.json + package-lock.json into /app (Used to install dependencies)
 
+```bash
 RUN npm install 
 --- "OR" ---
 RUN nom ci
-
+```
 - Install all project dependencies inside the image.
 
 - 'npm install' : 
@@ -31,18 +35,21 @@ RUN nom ci
     - optimized for CI/CD
     - for automated builds and production for speed and consistency
 
+```bash
 COPY . .
-
+```
 - Copy your whole project into the container's /app folder.
 - 1st dot is for current folder/file --> Dockerfile
 - 2nd dot is for the container --> '/app'
 
+```bash
 EXPOSE 5173
-
+```
 - Tell Docker that this app uses port 5173 (Vite's port).
 
+```bash
 CMD ["npm", "run", "dev", "--", "--host"]
-
+```
 - When the container starts → run the development server AND allow external access.
 
 
