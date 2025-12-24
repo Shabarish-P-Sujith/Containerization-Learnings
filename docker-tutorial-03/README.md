@@ -6,7 +6,16 @@
 Always include <username>/ before the repository name when tagging and pushing the images to Docker Hub !! 
 
 ## COMMANDS:
+```bash
+docker login
+docker build -t <local-image>:<local-tag> .
+docker tag <local-image>:<local-tag> <username>/<new-docker-repo>:<tagname>
+docker push <username>/<new-docker-repo>:<tagname>
+docker pull <username>/<new-docker-repo>:<tagname>
+docker logout
+```
 
+## EXPLANATIONS :
 1. Log in to Docker Hub.
 ```bash
 docker login
