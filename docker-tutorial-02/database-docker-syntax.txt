@@ -1,20 +1,18 @@
 a) PostgreSQL
 
 docker run -d --rm \
-  -v mongodata:/data/db \
-  -e MONGO_INITDB_ROOT_USERNAME=root \
-  -e MONGO_INITDB_ROOT_PASSWORD=foobarbaz \
-  -p 27017:27017 \
-  mongo:6.0.4
+  -v pgdata:/var/lib/postgresql/data \
+  -e POSTGRES_PASSWORD=foobarbaz \
+  -p 5432:5432 \
+  postgres:15.1-alpine
 
-# With custom mongod.conf file
+# With custom postresql.conf file
 docker run -d --rm \
-  -v mongodata:/data/db \
-  -v ${PWD}/mongod.conf:/etc/mongod.conf \
-  -e MONGO_INITDB_ROOT_USERNAME=root \
-  -e MONGO_INITDB_ROOT_PASSWORD=foobarbaz \
-  -p 27017:27017 \
-  mongo:6.0.4 --config /etc/mongod.conf
+  -v pgdata:/var/lib/postgresql/data \
+  -v ${PWD}/postgres.conf:/etc/postgresql/postgresql.conf \
+  -e POSTGRES_PASSWORD=foobarbaz \
+  -p 5432:5432 \
+  postgres:15.1-alpine -c 'config_file=/etc/postgresql/postgresql.conf'
 
 ================================================================================================
 
