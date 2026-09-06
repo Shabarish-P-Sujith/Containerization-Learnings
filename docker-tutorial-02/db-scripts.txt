@@ -1,5 +1,4 @@
 a) PostgreSQL
-
 docker run -d --rm `
   -v pgdata:/var/lib/postgresql/data `
   -e POSTGRES_USER=myuser `
@@ -9,5 +8,38 @@ docker run -d --rm `
   postgres:15.1-alpine
 
 b) MongoDB
+docker run -d --rm \
+  --name mongodb \
+  -e MONGO_INITDB_ROOT_USERNAME=myuser \
+  -e MONGO_INITDB_ROOT_PASSWORD=mypass \
+  -e MONGO_INITDB_DATABASE=mydb \
+  -p 27017:27017 \
+  mongo:6.0-alpine
+
 c) Redis
+docker run -d --rm \
+  --name redis \
+  -p 6379:6379 \
+  redis:7-alpine
+
 d) MySQL
+docker run -d --rm \
+  --name mysql \
+  -e MYSQL_ROOT_PASSWORD=mypass \
+  -e MYSQL_DATABASE=mydb \
+  -e MYSQL_USER=myuser \
+  -e MYSQL_PASSWORD=mypass \
+  -p 3306:3306 \
+  mysql:latest
+
+e) Neo4j
+docker run -d --name neo4j \
+  -p 7474:7474 \
+  -p 7687:7687 \
+  -e NEO4J_AUTH=neo4j/password \
+  neo4j:latest
+
+f) Cassandra
+docker run -d --name cassandra \
+  -p 9042:9042 \
+  cassandra:6.0
